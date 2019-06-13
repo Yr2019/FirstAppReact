@@ -2,7 +2,7 @@ import React from 'react';
 import PostListItem from '../post-list-item';
 import './post-list.css';
 
-const PostList = ({posts}) => {
+const PostList = ({posts, onDelete}) => {
   const postFilter = posts.filter(item => typeof item === "object");
   const elements = postFilter.map((item) => {
       const {id, ...itemProps} = item;
@@ -18,8 +18,12 @@ const PostList = ({posts}) => {
       //   <PostListItem  {...item} />   
       // </li>
       // Более правильной способ
+      
       <li key={id} className="list-group-item">
-        <PostListItem  {...itemProps} />   
+        <PostListItem  
+          {...itemProps} 
+            onDelete={() => onDelete(id)}
+          />   
       </li>
     )  
   });
