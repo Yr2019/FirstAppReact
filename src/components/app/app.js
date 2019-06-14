@@ -12,7 +12,7 @@ import PostAddForm from '../post-add-form';
 import styled from 'styled-components';
 
 
-const shortid = require('shortid');
+//const shortid = require('shortid');
 
 const AppBlock = styled.div`
   margin: 0 auto;
@@ -34,6 +34,17 @@ export default class App extends Component {
     };
     this.deleteItem = this.deleteItem.bind(this);
     this.addItem = this.addItem.bind(this);
+    this.idGenerator = this.idGenerator.bind(this);
+  }
+  idGenerator() {
+    const chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz";
+    let string_length = 8;
+    let randomstring = '';
+    for (let i = 0; i < string_length; i++) {
+      let rnum = Math.floor(Math.random() * chars.length);
+      randomstring += chars.substring(rnum, rnum + 1);
+    }
+    return randomstring
   }
 
   deleteItem(id){
@@ -57,7 +68,7 @@ export default class App extends Component {
     const newItem = {
       label: body,
       importnt: false,
-      id: shortid.generate()
+      id: this.idGenerator()
     }
     this.setState(({data}) => {
         const newArr = [...data, newItem];
