@@ -6,33 +6,33 @@ export default class PostListItem extends Component {
   constructor(props){
     super(props);
     this.state = {
-      important: false,
-      like: false,
+     // important: false,
+      //like: false,
       modal: false
     };
-    this.onImportant = this.onImportant.bind(this);
-    this.onLike = this.onLike.bind(this);
+    //this.onImportant = this.onImportant.bind(this);
+    //this.onLike = this.onLike.bind(this);
     this.toggle = this.toggle.bind(this);
   }
-
-  onImportant(){
-    this.setState(({important}) => ({
-      important: !important
-    }));
-  }
-  onLike(){
-    this.setState(({like}) => ({
-      like: !like
-    }));
-  }
+  
+  // onImportant(){
+  //   this.setState(({important}) => ({
+  //     important: !important
+  //   }));
+  // }
+  // onLike(){
+  //   this.setState(({like}) => ({
+  //     like: !like
+  //   }));
+  // }
   toggle() {
     this.setState(prevState => ({
       modal: !prevState.modal
     }));
   }
+  
   render() {
-    const {label, onDelete} = this.props;
-    const {important, like} = this.state;
+    const {label, onDelete,onToggleChange, like, id, important} = this.props;
     let classNames = 'app-list-item d-flex justify-content-between';
     if (important) {
       classNames += ' important';
@@ -44,13 +44,13 @@ export default class PostListItem extends Component {
       <div className={classNames}>
       <span 
       className="app-list-item-label"
-      onClick={this.onLike}>
+      onClick={() => onToggleChange(id, 'like')}>
         {label}
       </span>
       <div className="d-flex justify-content-center align-items-center">
         <button 
           type="button" 
-          className="btn-star btn-sm" onClick={this.onImportant}>
+          className="btn-star btn-sm" onClick={() => onToggleChange(id, 'important')}>
           <i className="fa fa-star"></i>
         </button>
         <button 
